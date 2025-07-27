@@ -2,8 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import BannerbgOne from "../assets/hero-bg.png";
-import BannerbgTwo from "../assets/banner-container.png";
+import BannerbgOne from "../../assets/hero-bg.png";
+import BannerbgTwo from "../../assets/banner-container.png";
 import { RiSearch2Line } from "react-icons/ri";
 import { Link } from "react-router";
 

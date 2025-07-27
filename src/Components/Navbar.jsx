@@ -2,7 +2,7 @@ import { RiSearch2Line, RiUserLine } from "react-icons/ri";
 import logo from "../assets/logo.png";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import { Link } from "react-router";
-import Cart from "./Cart";
+import Cart from "./common/Cart";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -38,7 +38,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {open ? <Cart open={open} setOpen={setOpen} /> : ""}
+      {open && <Cart open={open} setOpen={setOpen} />}
     </div>
   );
 };

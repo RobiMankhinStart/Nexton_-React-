@@ -1,8 +1,8 @@
 import React from "react";
-import Banner from "../Components/Banner";
-import Service from "../Components/Service";
-import Explore from "../Components/Explore";
-import Recommendations from "../Components/Recommendations";
+import Banner from "../Components/Home/Banner";
+import Service from "../Components/Home/Service";
+import Explore from "../Components/Home/Explore";
+import HomeReco from "../Components/Home/HomeReco";
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
       <Banner />
       <Service />
       <Explore />
-      <Recommendations />
+      <HomeReco />
     </div>
   );
 };

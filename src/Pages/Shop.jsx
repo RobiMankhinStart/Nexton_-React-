@@ -1,17 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Range } from "react-range"; // Add this import
-import RecommanCard from "../Components/common/RecommanCard";
+import BreadCrumb from "../Components/common/BreadCrumb";
+import AllShopProducts from "../Components/shop/AllShopProducts";
 
 const Shop = () => {
-  const [fetchData, setFetchData] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => setFetchData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
   //    .......for category
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -42,9 +34,10 @@ const Shop = () => {
     { id: "option5", label: "Price Hight - Low" },
   ];
   return (
-    <section id="shop" className="pt-10">
+    <section id="shop" className="pt-10 pb-10">
       <div className="container">
-        <div className="shop_columns flex gap-11">
+        <BreadCrumb breadcontent={"Shop"} breadlink={"/shop"} />
+        <div className="shop_columns mt-2 flex gap-11">
           <div className="left">
             <div className="category pb-10 border-b border-b-[#94A3B8]">
               <h2 className="text-[18px] font-poppins font-semibold text-[#111827] mb-2">
@@ -180,20 +173,7 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          <div className="right flex flex-wrap gap-3">
-            {fetchData.map((singleData) => (
-              <div key={singleData.id} className="">
-                <RecommanCard
-                  title={singleData.title}
-                  img={singleData.image}
-                  price={singleData.price}
-                  rating={singleData.rating.rate}
-                  count={singleData.rating.count}
-                  category={singleData.category}
-                />
-              </div>
-            ))}
-          </div>
+          <AllShopProducts />
         </div>
       </div>
     </section>

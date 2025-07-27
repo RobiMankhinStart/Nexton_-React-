@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ExploreCard from "./common/ExploreCard";
+import ExploreCard from "../common/ExploreCard";
 
 const Explore = () => {
   const settings = {

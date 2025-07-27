@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceCard from "./common/ServiceCard";
+import ServiceCard from "../common/ServiceCard";
 import { TbExchange, TbTruckDelivery, TbWorld } from "react-icons/tb";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 
