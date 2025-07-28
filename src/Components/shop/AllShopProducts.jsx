@@ -25,6 +25,14 @@ const AllShopProducts = () => {
       });
   }, []);
 
+  // add to card.........
+  const addToCart = (item) => {
+    const proDuctids = JSON.parse(localStorage.getItem("proId")) || [];
+    proDuctids.push(item);
+    localStorage.setItem("proId", JSON.stringify(proDuctids));
+    console.log(JSON.parse(localStorage.getItem("proId")));
+  };
+
   const start = (page - 1) * itemsPerPage;
   const currentItems = products.slice(start, start + itemsPerPage);
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -34,9 +42,10 @@ const AllShopProducts = () => {
         {currentItems?.map((singleData) => (
           <div key={singleData.id}>
             <SingleCard
+              addToCart={() => addToCart(singleData.id)}
               showProductPage={() => showProductPage(singleData)}
               title={singleData.title}
-              img={singleData.category.image}
+              img={singleData.images[0]}
               price={singleData.price}
               category={singleData.category.slug}
             />

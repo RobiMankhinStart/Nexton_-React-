@@ -48,7 +48,7 @@ const ProductReco = () => {
 
           <div className="slider-container">
             <Slider {...settings}>
-              {Product?.map((item, i) => {
+              {Product?.slice(0, 9).map((item, i) => {
                 return (
                   <SingleProductReco
                     key={i}

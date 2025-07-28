@@ -15,7 +15,7 @@ const SingleCard = ({
     <div className="w-[309px]  h-[430px] overflow-hidden duration-200 hover:shadow-md rounded-lg shadow-cyan-950 p-2 relative">
       <div
         onClick={addToCart}
-        className="p-2 rounded-full right-4 top-4 hover:scale-110 duration-300 z-40  shadow-gray-600 shadow-md bg-white absolute"
+        className="p-2 rounded-full right-4 top-4 hover:scale-110 duration-300 z-20  shadow-gray-600 shadow-md bg-white absolute"
       >
         <IoBagHandleOutline className="text-primary  text-[22px] " />
       </div>

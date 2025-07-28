@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const cartItems = JSON.parse(localStorage.getItem("proId"));
   return (
     <div
       id="NavBar"
@@ -33,7 +34,7 @@ const Navbar = () => {
               className="size-[32px] border-2 p-[-1px] text-primary cursor-pointer"
             />
             <span className="text-[12px] font-poppins font-[600] text-white absolute right-[-7px] top-[-4px] size-[20px] rounded-full flex items-center justify-center bg-[#0EA5E9]">
-              3
+              {cartItems?.length || "0"}
             </span>
           </div>
         </div>

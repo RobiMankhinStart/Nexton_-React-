@@ -62,13 +62,21 @@ const HomeReco = () => {
     navigate(`/product/${item.id}`);
   };
   const [value, setValue] = useState([]);
-  console.log(value);
+  // console.log(value);
   useEffect(() => {
     axios
       .get("https://api.escuelajs.co/api/v1/products")
       .then((res) => setValue(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  // add to card.........
+  const addToCart = (item) => {
+    const proDuctids = JSON.parse(localStorage.getItem("proId")) || [];
+    proDuctids.push(item);
+    localStorage.setItem("proId", JSON.stringify(proDuctids));
+    // console.log(JSON.parse(localStorage.getItem("proId")));
+  };
   return (
     <section className="py-[88px] ">
       <div className="container ">
@@ -82,9 +90,10 @@ const HomeReco = () => {
           </h2>
           <div className="mt-10 ">
             <Slider {...settings}>
-              {value?.map((item, index) => (
+              {value?.slice(0, 9).map((item, index) => (
                 <div key={index} className="">
                   <SingleCard
+                    addToCart={() => addToCart(item.id)}
                     showProductPage={() => showProductPage(item)}
                     title={item.title}
                     img={item.images[0]}
