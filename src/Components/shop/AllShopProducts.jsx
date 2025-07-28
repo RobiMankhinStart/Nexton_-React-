@@ -26,11 +26,13 @@ const AllShopProducts = () => {
   }, []);
 
   // add to card.........
+
   const addToCart = (item) => {
     const proDuctids = JSON.parse(localStorage.getItem("proId")) || [];
     proDuctids.push(item);
     localStorage.setItem("proId", JSON.stringify(proDuctids));
-    console.log(JSON.parse(localStorage.getItem("proId")));
+
+    // console.log(JSON.parse(localStorage.getItem("proId")));
   };
 
   const start = (page - 1) * itemsPerPage;

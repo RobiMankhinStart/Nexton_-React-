@@ -12,10 +12,28 @@ const Cart = ({ setOpen }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  const localIds = JSON.parse(localStorage.getItem("proId"));
+  const localIds = JSON.parse(localStorage.getItem("proId")) || [];
   // console.log(localIds);
+
+  // filtering only the items that arein the local storage ....
   const cartItems = value?.filter((item) => localIds?.includes(item.id));
   console.log(cartItems);
+
+  // calculating total price
+  const totalPrice = cartItems.reduce((sum, items) => {
+    return sum + items.price;
+  }, 0);
+  // console.log(totalPrice);
+
+  // removing a product from cart...
+  const [refresh, setRefresh] = useState(false);
+  const removeItem = (proID) => {
+    const updatedIDs = localIds.filter((item) => item !== proID);
+    localStorage.setItem("proId", JSON.stringify(updatedIDs));
+    setRefresh(!refresh);
+  };
+  console.log(removeItem);
+
   return (
     <section className="z-40 relative">
       <div
@@ -36,56 +54,25 @@ const Cart = ({ setOpen }) => {
           />
         </div>
 
-        <div className="AllProducts mt-5 h-[400px] overflow-y-scroll">
-          {/* {AllProduct?.map((item, i) => (
-            <div
-              key={i}
-              className="SingleProduct mt-3 h-[70px] flex items-center justify-between px-1"
-            >
-              <div className="flex gap-4 items-center">
-                <div
-                  onClick={() => {
-                    DeleteCart(item.id);
-                  }}
-                  className="w-[30px]"
-                >
-                  <MdDeleteOutline className="text-3xl cursor-pointer" />
-                </div>
-                <div className="w-[50px] text-center rounded-md ">
-                  <img src={item.images[0]} alt="img" />
-                </div>
-                <h2 className="font-poppins text-lg font-semibold text-primary">
-                  {item.title}
-                </h2>
-              </div>
-              <div className="price font-poppins font-medium text-primary">
-                {item.price} $
-              </div>
-            </div>
-          ))} */}
+        <div className="AllProducts flex flex-col gap-2 mt-5 h-[400px] overflow-y-scroll">
           {cartItems.map((item, i) => (
             <div
               key={i}
-              className="SingleProduct mt-3 h-[70px] flex items-center justify-between px-1"
+              className="SingleProduct mt-3 h-[70px] flex items-center justify-between pr-2"
             >
-              <div className="flex gap-4 items-center">
-                <div
-                  onClick={() => {
-                    // DeleteCart(item.id);delete cart
-                  }}
-                  className="w-[30px]"
-                >
-                  <MdDeleteOutline className="text-3xl cursor-pointer" />
-                </div>
-                <div className="w-[50px] text-center rounded-md ">
+              <div className="flex gap-2 items-center">
+                <div className="w-[80px] text-center rounded-lg overflow-hidden ">
                   <img src={item.images[0]} alt="img" />
                 </div>
-                <h2 className="font-poppins text-lg font-semibold text-primary">
+                <h2 className="truncate max-w-[160px] font-poppins text-md font-semibold text-primary">
                   {item.title}
                 </h2>
               </div>
-              <div className="price font-poppins font-medium text-primary">
-                {item.price}$
+              <div className="price flex flex-col items-center justify-center font-poppins font-medium text-primary">
+                <h4>{item.price}$</h4>
+                <div onClick={() => removeItem(item.id)} className="w-[30px]">
+                  <MdDeleteOutline className="text-2xl cursor-pointer" />
+                </div>
               </div>
             </div>
           ))}
@@ -96,7 +83,7 @@ const Cart = ({ setOpen }) => {
           </p>
           <p className="font-semibold  font-poppins text-[16px] text-primary">
             {/* {TotalCredit} */}
-            10$
+            {totalPrice}$
           </p>
         </div>
         <Link

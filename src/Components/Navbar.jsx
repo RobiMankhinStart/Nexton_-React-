@@ -7,11 +7,11 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const cartItems = JSON.parse(localStorage.getItem("proId"));
+  const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
   return (
     <div
       id="NavBar"
-      className="fixed top-0 left-0 right-0 z-10 py-[27px] hidden lg:block dark:text-white"
+      className="fixed top-0 left-0 right-0 z-20 py-[27px] hidden lg:block dark:text-white"
     >
       <div className="container ">
         <div className="Menu_Row flex justify-between items-center">
@@ -29,12 +29,15 @@ const Navbar = () => {
           </div>
           <div className="relative Menu_Buttons items-center flex gap-[22px] text-primary">
             <RiUserLine className="size-[24px] cursor-pointer" />
-            <LiaShoppingCartSolid
+            <button
               onClick={() => setOpen(true)}
-              className="size-[32px] border-2 p-[-1px] text-primary cursor-pointer"
-            />
+              aria-label="Open cart"
+              className="p-[-1] border-2"
+            >
+              <LiaShoppingCartSolid className="size-[32px] text-primary cursor-pointer" />
+            </button>
             <span className="text-[12px] font-poppins font-[600] text-white absolute right-[-7px] top-[-4px] size-[20px] rounded-full flex items-center justify-center bg-[#0EA5E9]">
-              {cartItems?.length || "0"}
+              {cartItems?.length || 0}
             </span>
           </div>
         </div>
