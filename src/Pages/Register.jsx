@@ -1,52 +1,75 @@
 import React, { useState } from "react";
 import { Form, Link } from "react-router";
+import BreadCrumb from "../Components/common/BreadCrumb";
 
 const Register = () => {
-  const [emailError, setEmailError] = useState("");
-  const [email, setEmail] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  // const [email, setEmail] = useState("");
 
-  const [pass, setPass] = useState("");
+  // const [pass, setPass] = useState("");
+  // const [passError, setPassError] = useState("");
+
+  // const [passAgain, setPassAgain] = useState("");
+  // const [againError, setAgainError] = useState("");
+
+  // const handleSubmit = (behave) => {
+  //   behave.preventDefault();
+  //   //----------------------------EMAIL VALIDATION
+  //   if (!email) {
+  //     setEmailError("Please enter your Email");
+  //   } else if (!pass) {
+  //     setPassError("Please enter your Password");
+  //   } else {
+  //     const upperCase = /[A-Z]/.test(pass);
+  //     const lowerCase = /[a-z]/.test(pass);
+  //     const digit = /[0-9]/.test(pass);
+  //     const Length = pass.length >= 8;
+  //     if (!upperCase) {
+  //       setPassError("Password must contain at least one uppercase letter");
+  //     } else if (!lowerCase) {
+  //       setPassError("Password must contain at least one lowercase letter");
+  //     } else if (!digit) {
+  //       setPassError("Password must contain at least one digit 0-9");
+  //     } else if (!Length) {
+  //       setPassError("Password must be at least 8 characters");
+  //     }
+  //   }
+  //   if (passAgain != pass) {
+  //     setAgainError("Password does not match");
+  //   }
+  // };
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("border-[#E5E7EB]");
+
+  const [password, setPassword] = useState("");
   const [passError, setPassError] = useState("");
 
   const [passAgain, setPassAgain] = useState("");
-  const [againError, setAgainError] = useState("");
-
-  const handleSubmit = (behave) => {
-    behave.preventDefault();
-    //----------------------------EMAIL VALIDATION
-    if (!email) {
-      setEmailError("Please enter your Email");
-    } else if (!pass) {
-      setPassError("Please enter your Password");
-    } else {
-      const upperCase = /[A-Z]/.test(pass);
-      const lowerCase = /[a-z]/.test(pass);
-      const digit = /[0-9]/.test(pass);
-      const Length = pass.length >= 8;
-      if (!upperCase) {
-        setPassError("Password must contain at least one uppercase letter");
-      } else if (!lowerCase) {
-        setPassError("Password must contain at least one lowercase letter");
-      } else if (!digit) {
-        setPassError("Password must contain at least one digit 0-9");
-      } else if (!Length) {
-        setPassError("Password must be at least 8 characters");
-      }
-    }
-    if (passAgain != pass) {
-      setAgainError("Password does not match");
-    }
-  };
+  const [passAgainError, setPassAgainError] = useState("");
 
   //---------------------------- PASSWORD VALIDATION
+  const handleSubmit = (e) => {
+    if (!email) {
+      setEmailError("border-red-600");
+    }
+    if (!password) {
+      setPassError("Please enter your password");
+    }
+    if (!passAgain) {
+      setPassAgainError("Please enter your password again");
+    }
+    console.log(e);
+  };
 
   return (
-    <div>
-      <section
-        id="Register_Box"
-        className="mt-[40px] mb-[72px] flex items-center justify-center"
-      >
-        <Form onSubmit={handleSubmit} className="w-[440px]">
+    <section
+      id="Register_Box"
+      className="mt-[40px] mb-[72px] flex items-center justify-center"
+    >
+      <div className="container">
+        <BreadCrumb breadcontent={"Register"} breadlink={"/register"} />
+
+        <Form onSubmit={handleSubmit} className=" w-[440px] mx-auto">
           {/* -------Header-------- */}
           <div>
             <h2 className="text-[36px] font-semibold text-second text-center mb-[60px]">
@@ -59,12 +82,12 @@ const Register = () => {
             {/* -----Email  */}
             <div>
               <p className="text-base font-semibold text-second">Email</p>
-              <p className="text-red-600 font-poppins">{emailError}</p>
+              {/* <p className="text-red-600 font-poppins">{emailError}</p> */}
               <input
                 onChange={(e) => {
-                  setEmail(e.target.value), setEmailError("");
+                  setEmail(e.target.value), setEmailError("border-[#E5E7EB]");
                 }}
-                className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
+                className={`not-visited:w-full border  ${emailError} rounded-[12px] h-[43px] px-5 outline-none mt-2`}
                 placeholder="example@example.com"
                 type="email"
               />
@@ -75,7 +98,7 @@ const Register = () => {
               <p className="text-red-600 font-poppins">{passError}</p>
               <input
                 onChange={(e) => {
-                  setPass(e.target.value), setPassError("");
+                  setPassword(e.target.value), setPassError("");
                 }}
                 className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
                 type="password"
@@ -86,10 +109,10 @@ const Register = () => {
               <p className="text-base font-semibold text-second">
                 Password (Again)
               </p>
-              <p className="text-red-600 font-poppins">{againError}</p>
+              <p className="text-red-600 font-poppins">{passAgainError}</p>
               <input
                 onChange={(e) => {
-                  setPassAgain(e.target.value), setAgainError("");
+                  setPassAgain(e.target.value), setPassAgainError("");
                 }}
                 className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
                 type="password"
@@ -99,7 +122,10 @@ const Register = () => {
 
           {/* ------Submit Button------ */}
           <div className="mt-[24px] flex flex-col gap-[24px]">
-            <button className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer">
+            <button
+              type="submit"
+              className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer"
+            >
               Continue
             </button>
             <p className="text-Primary font-medium text-[14px] text-center">
@@ -115,8 +141,8 @@ const Register = () => {
             </div>
           </div>
         </Form>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
