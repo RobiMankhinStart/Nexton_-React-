@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Link } from "react-router";
 import BreadCrumb from "../Components/common/BreadCrumb";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   // const [emailError, setEmailError] = useState("");
@@ -38,32 +39,49 @@ const Register = () => {
   //     setAgainError("Password does not match");
   //   }
   // };
+  const [userName, setUserName] = useState("");
+  const [userNameError, setUserNameError] = useState("");
+  const [userNameErrorBorder, setUserNameErrorBorder] =
+    useState("border-[#E5E7EB]");
+  const [showPass, setShowPass] = useState(false);
+
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("border-[#E5E7EB]");
+  const [emailError, setEmailError] = useState("");
+  const [emailErrorBorder, setEmailErrorBorder] = useState("border-[#E5E7EB]");
 
   const [password, setPassword] = useState("");
   const [passError, setPassError] = useState("");
+  const [passErrorBorder, setPassErrorBorder] = useState("border-[#E5E7EB]");
 
   const [passAgain, setPassAgain] = useState("");
   const [passAgainError, setPassAgainError] = useState("");
+  const [passAgainErrorBorder, setPassAgainErrorBorder] =
+    useState("border-[#E5E7EB]");
 
   //---------------------------- PASSWORD VALIDATION
   const handleSubmit = (e) => {
+    if (!userName) {
+      setUserNameError("Please enter your Name");
+      setUserNameErrorBorder("border-red-600");
+    }
     if (!email) {
-      setEmailError("border-red-600");
+      setEmailError("Please enter your Email");
+      setEmailErrorBorder("border-red-600");
     }
     if (!password) {
       setPassError("Please enter your password");
+      setPassErrorBorder("border-red-600");
     }
     if (!passAgain) {
-      setPassAgainError("Please enter your password again");
+      setPassAgainError("Enter your password again");
+      setPassAgainErrorBorder("border-red-600");
     }
     console.log(e);
   };
 
   return (
     <section
-      id="Register_Box"
+      id="Register"
       className="mt-[40px] mb-[72px] flex items-center justify-center"
     >
       <div className="container">
@@ -79,30 +97,60 @@ const Register = () => {
 
           {/* -------Input Box-------- */}
           <div className="flex flex-col gap-[24px]">
+            {/* -----userName  */}
+            <div>
+              <p className="text-base font-semibold text-second">User Name</p>
+              <p className="text-red-600 font-poppins">{userNameError}</p>
+              <input
+                onChange={(e) => {
+                  setUserName(e.target.value),
+                    setUserNameError(""),
+                    setUserNameErrorBorder("border-[#E5E7EB]");
+                }}
+                className={`not-visited:w-full border  ${userNameErrorBorder} rounded-[12px] h-[43px] px-5 outline-none mt-2`}
+                placeholder="name......."
+                type="text"
+              />
+            </div>
             {/* -----Email  */}
             <div>
               <p className="text-base font-semibold text-second">Email</p>
-              {/* <p className="text-red-600 font-poppins">{emailError}</p> */}
+              <p className="text-red-600 font-poppins">{emailError}</p>
               <input
                 onChange={(e) => {
-                  setEmail(e.target.value), setEmailError("border-[#E5E7EB]");
+                  setEmail(e.target.value),
+                    setEmailErrorBorder("border-[#E5E7EB]"),
+                    setEmailError("");
                 }}
-                className={`not-visited:w-full border  ${emailError} rounded-[12px] h-[43px] px-5 outline-none mt-2`}
-                placeholder="example@example.com"
+                className={`not-visited:w-full border  ${emailErrorBorder} rounded-[12px] h-[43px] px-5 outline-none mt-2`}
+                placeholder="email....."
                 type="email"
               />
             </div>
             {/* -----Password  */}
-            <div>
+            <div className="relative">
               <p className="text-base font-semibold text-second">Password</p>
               <p className="text-red-600 font-poppins">{passError}</p>
               <input
                 onChange={(e) => {
-                  setPassword(e.target.value), setPassError("");
+                  setPassErrorBorder("border-[#E5E7EB]"),
+                    setPassword(e.target.value),
+                    setPassError("");
                 }}
-                className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
-                type="password"
+                className={`w-full border ${passErrorBorder} rounded-[12px] h-[43px] px-5 outline-none mt-2`}
+                type={showPass ? "text" : "password"}
               />
+              {showPass ? (
+                <FaEyeSlash
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute bottom-[15px] right-3"
+                />
+              ) : (
+                <FaEye
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute bottom-[15px] right-3"
+                />
+              )}
             </div>
             {/* -----Password again */}
             <div>
@@ -112,9 +160,11 @@ const Register = () => {
               <p className="text-red-600 font-poppins">{passAgainError}</p>
               <input
                 onChange={(e) => {
-                  setPassAgain(e.target.value), setPassAgainError("");
+                  setPassAgainErrorBorder("border-[#E5E7EB]"),
+                    setPassAgain(e.target.value),
+                    setPassAgainError("");
                 }}
-                className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
+                className={`w-full ${passAgainErrorBorder} border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2`}
                 type="password"
               />
             </div>
