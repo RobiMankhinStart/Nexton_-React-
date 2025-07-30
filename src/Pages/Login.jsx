@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 
 const Login = () => {
+  const [userData, setUserData] = useState({
+    email: "",
+    emailError: "",
+    password: "",
+    passwordError: "",
+  });
+  const handleLogin = () => {
+    if (!userData.email) {
+      setUserData((prev) => ({ ...prev, emailError: "enter your email" }));
+    }
+    if (!userData.password) {
+      setUserData((prev) => ({
+        ...prev,
+        passwordError: "enter your password",
+      }));
+    } else {
+      console.log("done");
+    }
+  };
+  console.log(userData);
   return (
     <>
       <section
@@ -21,7 +41,15 @@ const Login = () => {
             {/* -----Email  */}
             <div>
               <p className="text-base font-semibold text-second">Email</p>
+              <p className="text-red-600 font-poppins">{userData.emailError}</p>
               <input
+                onChange={(e) =>
+                  setUserData((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                    emailError: "",
+                  }))
+                }
                 className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
                 placeholder="example@example.com"
                 type="email"
@@ -30,7 +58,17 @@ const Login = () => {
             {/* -----Password  */}
             <div>
               <p className="text-base font-semibold text-second">Password</p>
+              <p className="text-red-600 font-poppins">
+                {userData.passwordError}
+              </p>
               <input
+                onChange={(e) =>
+                  setUserData((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                    passwordError: "",
+                  }))
+                }
                 className="w-full border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2"
                 type="password"
               />
@@ -39,7 +77,10 @@ const Login = () => {
 
           {/* ------Submit Button------ */}
           <div className="mt-[24px] flex flex-col gap-[24px]">
-            <button className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer">
+            <button
+              onClick={handleLogin}
+              className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer"
+            >
               Continue
             </button>
             <p className="text-Primary font-medium text-[14px] text-center">

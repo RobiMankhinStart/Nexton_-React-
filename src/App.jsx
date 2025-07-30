@@ -13,6 +13,7 @@ import Product from "./Pages/Product";
 import CheckOut from "./Pages/CheckOut";
 import Login from "./Pages/LogIn";
 import Register from "./Pages/Register";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const myRouter = createBrowserRouter(
@@ -32,6 +33,7 @@ function App() {
   );
   return (
     <div className="">
+      <ToastContainer />
       <RouterProvider router={myRouter} />
     </div>
   );

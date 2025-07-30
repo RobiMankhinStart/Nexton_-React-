@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Form, Link } from "react-router";
+import { Form, Link, useNavigate } from "react-router";
 import BreadCrumb from "../Components/common/BreadCrumb";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Bounce, toast, Zoom } from "react-toastify";
+import { LuEye, LuEyeClosed } from "react-icons/lu";
+import axios from "axios";
+import { PulseLoader } from "react-spinners";
 
 const Register = () => {
   // const [emailError, setEmailError] = useState("");
@@ -39,11 +43,17 @@ const Register = () => {
   //     setAgainError("Password does not match");
   //   }
   // };
+  // state fot submit button loading ..............
+  const [buttonload, setButtonload] = useState(false);
+  const navigate = useNavigate();
+
+  // .............states for form validation ............
   const [userName, setUserName] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const [userNameErrorBorder, setUserNameErrorBorder] =
     useState("border-[#E5E7EB]");
   const [showPass, setShowPass] = useState(false);
+  const [showAgainPass, setShowAgainPass] = useState(false);
 
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -75,8 +85,51 @@ const Register = () => {
     if (!passAgain) {
       setPassAgainError("Enter your password again");
       setPassAgainErrorBorder("border-red-600");
+    } else {
+      setButtonload(true),
+        axios
+          .post("https://api.escuelajs.co/api/v1/users/", {
+            name: userName,
+            email: email,
+            password: password,
+            avatar: "https://picsum.photos/800",
+          })
+          .then((res) => {
+            console.log(res),
+              toast.success("Registered Successfully!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+              }),
+              setButtonload(false),
+              navigate("/Login");
+          })
+          .catch((err) => {
+            console.log(err),
+              setButtonload(false),
+              toast.error("something went wrong!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Zoom,
+              });
+          });
+      // setEmail(""),
+      // setUserName(""),
+      // setPassword(""),
+      // setPassAgain("");
     }
-    console.log(e);
   };
 
   return (
@@ -153,7 +206,7 @@ const Register = () => {
               )}
             </div>
             {/* -----Password again */}
-            <div>
+            <div className="relative">
               <p className="text-base font-semibold text-second">
                 Password (Again)
               </p>
@@ -165,19 +218,40 @@ const Register = () => {
                     setPassAgainError("");
                 }}
                 className={`w-full ${passAgainErrorBorder} border border-BorderCol rounded-[12px] h-[43px] px-5 outline-none mt-2`}
-                type="password"
+                type={showAgainPass ? "text" : "password"}
               />
+              {showAgainPass ? (
+                <LuEye
+                  onClick={() => setShowAgainPass(!showAgainPass)}
+                  className="absolute bottom-[15px] right-3"
+                />
+              ) : (
+                <LuEyeClosed
+                  onClick={() => setShowAgainPass(!showAgainPass)}
+                  className="absolute bottom-[15px] right-3"
+                />
+              )}
             </div>
           </div>
 
           {/* ------Submit Button------ */}
           <div className="mt-[24px] flex flex-col gap-[24px]">
-            <button
-              type="submit"
-              className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer"
-            >
-              Continue
-            </button>
+            {buttonload ? (
+              <button
+                type="submit"
+                className="w-full cursor-no-drop bg-second rounded-full text-white py-[14px]"
+              >
+                <PulseLoader color="#24ffbd" />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="w-full bg-second rounded-full text-white py-[14px] cursor-pointer"
+              >
+                Continue
+              </button>
+            )}
+
             <p className="text-Primary font-medium text-[14px] text-center">
               OR
             </p>
