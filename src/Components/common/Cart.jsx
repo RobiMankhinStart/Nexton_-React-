@@ -27,6 +27,7 @@ const Cart = ({ setOpen }) => {
 
   // removing a product from cart...
   const [refresh, setRefresh] = useState(false);
+
   const removeItem = (proID) => {
     const updatedIDs = localIds.filter((item) => item !== proID);
     localStorage.setItem("proId", JSON.stringify(updatedIDs));

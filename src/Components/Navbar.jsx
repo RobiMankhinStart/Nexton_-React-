@@ -28,7 +28,9 @@ const Navbar = () => {
             />
           </div>
           <div className="relative Menu_Buttons items-center flex gap-[22px] text-primary">
-            <RiUserLine className="size-[24px] cursor-pointer" />
+            <Link to={"/Login"} className="cursor-pointer">
+              <RiUserLine className="size-[24px] cursor-pointer" />
+            </Link>
             <button
               onClick={() => setOpen(true)}
               aria-label="Open cart"
