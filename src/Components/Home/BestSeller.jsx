@@ -83,7 +83,7 @@ const BestSeller = () => {
           </div>
         </div>
 
-        <div className="slider-container">
+        <div className="slider-container flex">
           <Slider {...settings}>
             {products?.slice(0, 9).map((item) => (
               <SingleCard

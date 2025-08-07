@@ -17,7 +17,7 @@ const Cart = ({ setOpen }) => {
 
   // filtering only the items that arein the local storage ....
   const cartItems = value?.filter((item) => localIds?.includes(item.id));
-  console.log(cartItems);
+  // console.log(cartItems);
 
   // calculating total price
   const totalPrice = cartItems.reduce((sum, items) => {
@@ -33,7 +33,7 @@ const Cart = ({ setOpen }) => {
     localStorage.setItem("proId", JSON.stringify(updatedIDs));
     setRefresh(!refresh);
   };
-  console.log(removeItem);
+  // console.log(removeItem);
 
   return (
     <section className="z-40 relative">
@@ -90,7 +90,7 @@ const Cart = ({ setOpen }) => {
         <Link
           onClick={() => setOpen(false)}
           className="mt-5 flex p-1 rounded-md items-center justify-center font-semibold bg-black font-poppins text-[16px] text-white"
-          to={"/checkout/asc"}
+          to={"/checkout/:checkout"}
         >
           Check Out
         </Link>

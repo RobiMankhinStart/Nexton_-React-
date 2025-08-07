@@ -14,7 +14,7 @@ const Product = () => {
   const params = useParams();
 
   const [value, setValue] = useState({});
-  console.log(value);
+  // console.log(value);
 
   useEffect(() => {
     axios
@@ -47,7 +47,10 @@ const Product = () => {
     <>
       <section id="product" className="pt-[40px] pb-[90px]">
         <div className="container">
-          <BreadCrumb breadcontent={"product"} breadlink={"/product"} />
+          <BreadCrumb
+            breadcontent={"product"}
+            breadlink={"/product/:singleproduct"}
+          />
 
           <div className="detailRow flex justify-between mt-4">
             <div className="relative proImg w-[804px]">
