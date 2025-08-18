@@ -73,7 +73,7 @@ const ProductReco = () => {
 
   return (
     <>
-      <section id="reco" className="mt-[88px] mb-[88px]">
+      <section id="reco" className="mt-[88px] mb-[88px] w-[94%]">
         <div className="container">
           <div>
             <h2 className="text-[36px] font-poppins font-semibold mb-[40px] hidden lg:block">

@@ -51,63 +51,57 @@ const Product = () => {
         className="pt-[40px] pb-[90px] border-t border-t-[#E5E7EB]"
       >
         <div className="container">
-          <BreadCrumb
+          {/* <BreadCrumb
             breadcontent={"product"}
             breadlink={"/product/:singleproduct"}
-          />
+          /> */}
 
           <div className="detailRow flex flex-col lg:flex-row justify-between items-center lg:items-start mt-4">
             <div className="relative proImg mx-auto lg:mx-0 w-full lg:w-[804px]">
-              {/* <div className="Img ">
-                {value.images && (
-                  <img
-                    className="w-[610px]"
-                    src={value.images[0]}
-                    alt="productImg"
-                  />
-                )}
-              </div> */}
-
               <MainProductSlider images={value?.images} />
               <ResProDescription
                 value={value}
                 setCount={setCount}
                 count={count}
               />
-              <h2 className="mt-[105px] hidden lg:inline-block mb-[4px] text-[36px] font-semibold font-poppins text-second">
-                {value.title}
-              </h2>
+              {/* ......................
+          ..................
+             */}
+              <div className=" w-[95%]">
+                <h2 className="mt-[105px] hidden lg:inline-block mb-[4px] text-[36px] font-semibold font-poppins text-second">
+                  {value.title}
+                </h2>
+                <p className="lg:w-[735px]  ml-3 w-[80%] text-[16px] font-normal font-poppins text-[#4B5563]">
+                  {value.description}
+                </p>
+                <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
+                  Fabric + Care
+                </h2>
+                <p className="w-full lg:w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
+                  Material: Soft wool blend
+                </p>
+                <p className="w-full lg:w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
+                  Color: Various
+                </p>
+                <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
+                  Sale performance
+                </h2>
+                <p className="w-full lg:w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
+                  Sales: 0
+                </p>
+                <p className="w-full lg:w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
+                  Review Count: -
+                </p>
 
-              <p className="lg:w-[735px]  ml-3 w-[80%] text-[16px] font-normal font-poppins text-[#4B5563]">
-                {value.description}
-              </p>
-
-              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
-                Fabric + Care
-              </h2>
-              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
-                Material: Soft wool blend
-              </p>
-              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
-                Color: Various
-              </p>
-
-              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
-                Sale performance
-              </h2>
-              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
-                Sales: 0
-              </p>
-              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
-                Review Count: -
-              </p>
-              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
-                Review Average: -
-              </p>
-
-              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
-                Keywords
-              </h2>
+                <p className="w-full lg:w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
+                  Review Average:
+                </p>
+                <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
+                  Keywords
+                </h2>
+              </div>
+              {/* ........................
+            ................... */}
               <div className="keyRow ml-3 lg:ml-0 flex-wrap flex gap-[8px] items-center">
                 {keyWord.map((item, i) => {
                   return (
@@ -125,7 +119,7 @@ const Product = () => {
               </div>
             </div>
 
-            <div className="proDescription w-[460px] h-fit border border-[#E5E7EB] rounded-[16px] p-[33px]">
+            <div className="proDescription w-[460px] h-fit border lg:inline-block hidden border-[#E5E7EB] rounded-[16px] p-[33px]">
               <div className="flex justify-between">
                 <div className="flex gap-[6px] items-center">
                   <PiStarFill className="text-[#FBBF24]" />

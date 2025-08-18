@@ -3,7 +3,7 @@ import { RiShoppingBag4Fill } from "react-icons/ri";
 
 const ResProDescription = ({ value, setCount, count }) => {
   return (
-    <section className="relative ml-4 mt-10 lg:hidden inline-block">
+    <section className="relative w-[90%] ml-4 mt-10 lg:hidden inline-block">
       {/* <div className="conatainer"> */}
       <div className="proDescriptionDiv w-full mx-auto items-center flex flex-col justify-center">
         <div className="  flex flex-col border  border-[#E5E7EB] rounded-[16px] p-[33px]">
