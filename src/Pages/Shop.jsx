@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Range } from "react-range"; // Add this import
 import BreadCrumb from "../Components/common/BreadCrumb";
 import AllShopProducts from "../Components/shop/AllShopProducts";
+import { CiFilter } from "react-icons/ci";
+import { TiArrowSortedDown } from "react-icons/ti";
+import Filters from "../Components/shop/Filters";
 
 const Shop = () => {
   //    .......for category
   const [selectedOption, setSelectedOption] = useState("");
+  const [openfilter, setOpenfilter] = useState(false);
 
   const options = [
     { id: "1", label: "Men's fashion" },
@@ -34,11 +38,35 @@ const Shop = () => {
     { id: "option5", label: "Price Hight - Low" },
   ];
   return (
-    <section id="shop" className="pt-10 pb-10">
+    <section
+      // onClick={() => setOpenfilter(false)}
+      id="shop"
+      className="pt-5 relative z-0 border-t pb-10"
+    >
       <div className="container">
-        <BreadCrumb breadcontent={"Shop"} breadlink={"/shop"} />
-        <div className="shop_columns mt-2 flex gap-11">
-          <div className="left">
+        <div className="ml-2">
+          <BreadCrumb breadcontent={"Shop"} breadlink={"/shop"} />
+        </div>
+        <div className="mt-7 relative shop_columns lg:flex-row flex-col  flex gap-11">
+          <div className="absolute z-20 left-[5%] md:left-[25%] -top-5  p-2 rounded-xl bg-white lg:hidden flex items-center justify-between md:justify-center gap-[120px] md:gap-[209px]">
+            <button
+              onClick={() => setOpenfilter(!openfilter)}
+              className="border cursor-pointer border-[#E5E7EB] px-3 py-[6px] rounded-2xl text-[#4B5563] font-poppins text-[12px] flex items-center gap-[6px]"
+            >
+              <CiFilter />
+              Filters
+            </button>
+            <button className="border cursor-pointer border-[#E5E7EB] px-3 py-[6px] rounded-2xl text-[#4B5563] font-poppins text-[12px] flex items-center gap-[6px]">
+              Rows per page
+              <TiArrowSortedDown />
+            </button>
+          </div>
+          {/* .......... responsive filter section.......  */}
+          <Filters setOpenfilter={setOpenfilter} openfilter={openfilter} />
+
+          {/* .......... normal filter section.......  */}
+
+          <div className=" hidden lg:inline-block left">
             <div className="category pb-10 border-b border-b-[#94A3B8]">
               <h2 className="text-[18px] font-poppins font-semibold text-[#111827] mb-2">
                 Categories

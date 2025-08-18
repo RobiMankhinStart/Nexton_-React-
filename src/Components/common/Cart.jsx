@@ -36,12 +36,12 @@ const Cart = ({ setOpen }) => {
   // console.log(removeItem);
 
   return (
-    <section className="z-40 relative">
+    <section className="z-50  relative">
       <div
         onClick={() => setOpen(false)}
-        className="fixed top-0 w-full  h-screen bg-[#00000050] z-40"
+        className="fixed left-0 top-0 w-full  h-screen bg-[#00000050] z-40"
       ></div>
-      <div className="fixed top-0 right-0 z-50 w-[400px] h-screen bg-white p-3">
+      <div className="fixed top-0 px-4  right-0 z-50 w-[100%] md:w-[400px] h-screen bg-white p-3">
         <div
           className="flex items-center justify-between
         "

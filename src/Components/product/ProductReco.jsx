@@ -24,12 +24,51 @@ const ProductReco = () => {
   //   console.log(Product)
 
   // slick
-  var settings = {
-    dots: true,
+  const settings = {
     infinite: true,
+    slidesToShow: 3,
     speed: 500,
-    slidesToShow: 4,
+    dots: true,
+    arrows: false,
+    autoplay: true,
     slidesToScroll: 1,
+    autoplaySpeed: 3000,
+    centerMode: true,
+    centerPadding: "10px",
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "50px",
+          variableWidth: false,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          centerMode: true,
+          centerPadding: "160px",
+          variableWidth: false,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: "10px",
+          centerMode: true,
+        },
+      },
+    ],
   };
 
   return (

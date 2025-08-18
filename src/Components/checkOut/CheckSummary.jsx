@@ -69,7 +69,10 @@ const CheckSummery = () => {
 
   return (
     <>
-      <section id="Checkout-Summery" className="w-[618px]">
+      <section
+        id="Checkout-Summery"
+        className="w-[618px] md:w-[100%] lg:inline-block hidden"
+      >
         <div>
           <h2 className="text-2xl font-poppins font-semibold text-second">
             Order summary
@@ -94,7 +97,7 @@ const CheckSummery = () => {
                   <p className="text-Primary text-sm font-normal flex items-center gap-1 mt-1">
                     <IoResize /> One size
                   </p>
-                  <div className="bg-[#E5E7EB] p-2 rounded-[20px] flex items-center gap-4 mt-[20px]">
+                  <div className="bg-[#E5E7EB]  w-[107px] p-2 rounded-[20px] flex items-center gap-4 mt-[20px]">
                     <button
                       className="bg-white pb-[2px] flex justify-center items-center w-[24px] h-[24px] border-2 border-[#E5E7EB] rounded-full text-[18px] text-second cursor-pointer hover:bg-Primary hover:scale-105  duration-[.1s] select-none"
                       onClick={() => decreaseQTY(item.id)}

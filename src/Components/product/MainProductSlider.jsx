@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BsStars } from "react-icons/bs";
+import { IoBagHandleOutline } from "react-icons/io5";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -35,7 +37,14 @@ const MainProductSlider = ({ images }) => {
   //   };
 
   return (
-    <div className="flex justify-between items-center w-[804px]">
+    <div className="relative flex  flex-col lg:flex-row-reverse gap-4 items-center mx-auto max-w-[90%] lg:max-w-[804px]">
+      <div className=" rounded-2xl flex items-center gap-1 p-1 lg:p-2 px-2 left-6 lg:px-4 lg:left-[185px]  md:left-12 top-4 hover:scale-110 duration-300 z-40  shadow-gray-600 shadow-md bg-white absolute">
+        <BsStars />
+        New in
+      </div>
+      <div className="p-2 lg:p-3 rounded-full right-6 md:right-12 lg:right-[16px] top-3 hover:scale-110 duration-300 z-40  shadow-gray-600 shadow-md bg-white absolute">
+        <IoBagHandleOutline className="text-primary  text-[22px] " />
+      </div>
       {/* Thumbnail Slider */}
       {/* <div className=" flex-col px-2">
         <Slider {...thumbnailSettings}>
@@ -58,13 +67,20 @@ const MainProductSlider = ({ images }) => {
           ))}
         </Slider>
       </div> */}
-
+      {/* Main Image Display */}
+      <div className=" w-[100%] lg:w-[640px] ">
+        <img
+          src={images[currentImageIndex]}
+          alt={`Product view ${currentImageIndex + 1}`}
+          className="w-full rounded-xl h-auto max-h-[650px] object-contain"
+        />
+      </div>
       {/* Thumbnails Column - Left Side */}
-      <div className="  flex items-start gap-10 flex-col">
+      <div className="  flex items-start gap-10 lg:flex-col">
         {images.map((image, index) => (
           <div
             key={`thumb-${index}`}
-            className={`max-w-[150px] rounded-lg  cursor-pointer border-2 transition-all ${
+            className={`max-w-[16%] mx-auto lg:max-w-[150px] rounded-lg  cursor-pointer border-2 transition-all ${
               index === currentImageIndex
                 ? "border-blue-500 scale-105"
                 : "border-transparent hover:border-gray-300"
@@ -78,14 +94,6 @@ const MainProductSlider = ({ images }) => {
             />
           </div>
         ))}
-      </div>
-      {/* Main Image Display */}
-      <div className="w-[640px] ">
-        <img
-          src={images[currentImageIndex]}
-          alt={`Product view ${currentImageIndex + 1}`}
-          className="w-full rounded-xl h-auto max-h-[650px] object-contain mx-auto"
-        />
       </div>
     </div>
   );

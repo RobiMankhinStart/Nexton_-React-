@@ -5,9 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import BannerbgOne from "../../assets/hero-bg.png";
 import BannerbgTwo from "../../assets/banner-container.png";
 import { RiSearch2Line } from "react-icons/ri";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { searchPro } from "../../SearchSlice";
 
 const Banner = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const settings = {
     dots: true,
     arrows: false,
@@ -30,7 +34,10 @@ const Banner = () => {
       <div className="w-2.5 h-2.5 rounded-full border-2 border-black bg-white mx-1.5 transition-all duration-300" />
     ),
   };
-
+  const handleToShop = () => {
+    navigate("/shop");
+    dispatch(searchPro(null));
+  };
   const bannerImages = [BannerbgOne, BannerbgTwo];
 
   return (
@@ -49,13 +56,13 @@ const Banner = () => {
                 <h1 className="lg:py-6 pt-2 pb-10 font-poppins text-3xl lg:text-[64px] lg:w-[632px] w-[312px] font-semibold">
                   Exclusive collection for everyone
                 </h1>
-                <Link
+                <div
                   className="px-9 py-5 gap-2 w-[198px] rounded-[40px] flex bg-[#111827] font-poppins text-base font-medium text-white justify-center items-center"
-                  to="/"
+                  onClick={handleToShop}
                 >
                   Explore now
                   <RiSearch2Line className="size-5" />
-                </Link>
+                </div>
               </div>
             </section>
           </div>

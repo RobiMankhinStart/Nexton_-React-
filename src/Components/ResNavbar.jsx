@@ -6,8 +6,12 @@ import { FaBars } from "react-icons/fa";
 import { Link } from "react-router";
 import { MdOutlineCancel } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
+import Cart from "./common/Cart";
 
 const ResNavbar = () => {
+  const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
+  const [open, setOpen] = useState(false);
+
   const [showNav, setShowNav] = useState(false);
   return (
     <div
@@ -15,7 +19,7 @@ const ResNavbar = () => {
       className=" fixed top-0 left-0 right-0 z-9 lg:hidden py-5 px-4 dark:text-white"
     >
       <div className="container">
-        <div className="Menu_Row flex items-center justify-between">
+        <div className="Menu_Row w-full flex items-center justify-between">
           <Link to={"/"} className="menu_Logo w-[24px] ">
             <img src={resLogo} alt="logo" />
           </Link>
@@ -53,14 +57,20 @@ const ResNavbar = () => {
           <div className="py-4 px-3 content_Row w-[90%] mx-auto flex flex-col items-center rounded-md bg-emerald-100 ">
             <div className="relative Menu_Buttons items-center flex flex-col gap-[22px] text-primary">
               <RiUserLine className="size-[24px] cursor-pointer" />
-              <LiaShoppingCartSolid className="size-[32px] border-2 p-[-1px] text-primary cursor-pointer" />
+              <LiaShoppingCartSolid
+                onClick={() => {
+                  setOpen(!open), setShowNav(false);
+                }}
+                className="size-[32px] border-2 p-[-1px] text-primary cursor-pointer"
+              />
               <span className="text-[12px] font-poppins font-[600] text-white absolute right-[-7px] top-[42px] size-[20px] rounded-full flex items-center justify-center bg-[#0EA5E9]">
-                3
+                {cartItems?.length || 0}
               </span>
             </div>
           </div>
         </div>
       </div>
+      {open && <Cart open={open} setOpen={setOpen} />}
     </div>
   );
 };

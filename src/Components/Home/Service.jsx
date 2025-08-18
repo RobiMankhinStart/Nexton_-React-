@@ -10,7 +10,7 @@ const Service = () => {
         <h2 className="text-[#111827] ml-6 mb-6 lg:hidden font-semibold font-poppins text-[16px]">
           Nexton® always with you
         </h2>
-        <div className="flex justify-around gap-5 lg:gap-1 items-center flex-wrap  service_row lg:*:py-6 lg:*:px-10 border border-[#E5E7EB] rounded-[16px] ">
+        <div className="flex justify-around gap-5 lg:gap-1 items-center flex-wrap  service_row lg:py-6 px-6 lg:px-10 lg:border border-[#E5E7EB] rounded-[16px] ">
           {/* <div className="service_item flex"> */}
           <ServiceCard
             serviceName={"Free shipping"}

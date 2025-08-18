@@ -3,9 +3,11 @@ import axios from "axios";
 import Pagination from "../Pagination";
 import SingleCard from "../common/SingleCard";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const AllShopProducts = () => {
   const [products, setProducts] = useState([]);
+  const reduxProduct = useSelector((state) => state.searchProduct.value);
   const [page, setPage] = useState(1);
   const itemsPerPage = 9;
   // ...navigation to product page
@@ -18,12 +20,16 @@ const AllShopProducts = () => {
     axios
       .get("https://api.escuelajs.co/api/v1/products")
       .then((res) => {
-        setProducts(res.data);
+        if (!reduxProduct) return setProducts(res.data);
+        const filteredProduct = res.data.filter(
+          (item) => item.title == reduxProduct
+        );
+        setProducts(filteredProduct);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reduxProduct]);
 
   // add to card.........
 
@@ -39,8 +45,8 @@ const AllShopProducts = () => {
   const currentItems = products.slice(start, start + itemsPerPage);
   const totalPages = Math.ceil(products.length / itemsPerPage);
   return (
-    <section className="flex flex-col">
-      <div className="right flex flex-wrap gap-3">
+    <section className="flex mt-7  flex-col">
+      <div className="right justify-center flex flex-wrap gap-3">
         {currentItems?.map((singleData) => (
           <div key={singleData.id}>
             <SingleCard

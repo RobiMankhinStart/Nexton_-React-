@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import MainProductSlider from "../Components/product/MainProductSlider";
 import { BsStars } from "react-icons/bs";
+import ResProDescription from "../Components/product/ResProDescription";
 
 const Product = () => {
   const params = useParams();
@@ -45,22 +46,18 @@ const Product = () => {
 
   return (
     <>
-      <section id="product" className="pt-[40px] pb-[90px]">
+      <section
+        id="product"
+        className="pt-[40px] pb-[90px] border-t border-t-[#E5E7EB]"
+      >
         <div className="container">
           <BreadCrumb
             breadcontent={"product"}
             breadlink={"/product/:singleproduct"}
           />
 
-          <div className="detailRow flex justify-between mt-4">
-            <div className="relative proImg w-[804px]">
-              <div className=" rounded-2xl flex items-center gap-1  p-2 px-4  left-[180px] top-4 hover:scale-110 duration-300 z-40  shadow-gray-600 shadow-md bg-white absolute">
-                <BsStars />
-                New in
-              </div>
-              <div className="p-2 rounded-full right-[15px] top-4 hover:scale-110 duration-300 z-40  shadow-gray-600 shadow-md bg-white absolute">
-                <IoBagHandleOutline className="text-primary  text-[22px] " />
-              </div>
+          <div className="detailRow flex flex-col lg:flex-row justify-between items-center lg:items-start mt-4">
+            <div className="relative proImg mx-auto lg:mx-0 w-full lg:w-[804px]">
               {/* <div className="Img ">
                 {value.images && (
                   <img
@@ -70,41 +67,48 @@ const Product = () => {
                   />
                 )}
               </div> */}
+
               <MainProductSlider images={value?.images} />
-              <h2 className="mt-[105px] mb-[4px] text-[36px] font-semibold font-poppins text-second">
+              <ResProDescription
+                value={value}
+                setCount={setCount}
+                count={count}
+              />
+              <h2 className="mt-[105px] hidden lg:inline-block mb-[4px] text-[36px] font-semibold font-poppins text-second">
                 {value.title}
               </h2>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+
+              <p className="lg:w-[735px]  ml-3 w-[80%] text-[16px] font-normal font-poppins text-[#4B5563]">
                 {value.description}
               </p>
 
-              <h2 className="mt-[60px] mb-[4px] text-[24px] font-semibold font-poppins text-second">
+              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
                 Fabric + Care
               </h2>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
                 Material: Soft wool blend
               </p>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
                 Color: Various
               </p>
 
-              <h2 className="mt-[60px] mb-[4px] text-[24px] font-semibold font-poppins text-second">
+              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
                 Sale performance
               </h2>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
                 Sales: 0
               </p>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
                 Review Count: -
               </p>
-              <p className="w-[735px] text-[16px] font-normal font-poppins text-[#4B5563]">
+              <p className="w-[735px] ml-3 lg:ml-0 text-[16px] font-normal font-poppins text-[#4B5563]">
                 Review Average: -
               </p>
 
-              <h2 className="mt-[60px] mb-[4px] text-[24px] font-semibold font-poppins text-second">
+              <h2 className="mt-[60px] ml-3 lg:ml-0 mb-[4px] text-[24px] font-semibold font-poppins text-second">
                 Keywords
               </h2>
-              <div className="keyRow flex gap-[8px] items-center">
+              <div className="keyRow ml-3 lg:ml-0 flex-wrap flex gap-[8px] items-center">
                 {keyWord.map((item, i) => {
                   return (
                     <div
@@ -158,7 +162,7 @@ const Product = () => {
                 </button>
               </div>
 
-              <div className="mt-[38px] flex justify-between">
+              <div className="mt-[38px] flex-wrap flex gap-4 justify-between">
                 <div className="count flex gap-[16px] items-center bg-[#E5E7EB] rounded-full w-fit py-[8px] px-[12px]">
                   <button
                     onClick={() => setCount(count - 1)}
