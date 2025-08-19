@@ -6,14 +6,15 @@ import {
 } from "react-router";
 import "./App.css";
 import LayOut_One from "./Layouts/LayOut_One";
-import NotFound from "./Pages/NotFound";
-import Home from "./Pages/Home";
-import Shop from "./Pages/Shop";
-import Product from "./Pages/Product";
-import CheckOut from "./Pages/CheckOut";
-import Login from "./Pages/LogIn";
-import Register from "./Pages/Register";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+
+import CheckOut from "./pages/CheckOut";
+import Login from "./pages/LogIn";
+import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
+import Product from "./Pages/Product";
 
 function App() {
   const myRouter = createBrowserRouter(
