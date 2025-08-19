@@ -1,6 +1,6 @@
 import CheckInfo from "../Components/checkOut/CheckInfo";
 import CheckSummery from "../Components/checkOut/CheckSummary";
-import ResponsiveCheckout from "../Components/checkOut/responsiveCheckout";
+import ResponsiveCheckout from "../Components/checkOut/ResponsiveCheckout";
 import BreadCrumb from "../Components/common/BreadCrumb";
 
 const CheckOut = () => {
