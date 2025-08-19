@@ -6,13 +6,13 @@ import {
 } from "react-router";
 import "./App.css";
 import LayOut_One from "./Layouts/LayOut_One";
-import NotFound from "./pages/NotFound";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
+import NotFound from "./Pages/NotFound";
+import Home from "./Pages/Home";
+import Shop from "./Pages/Shop";
 
-import CheckOut from "./pages/CheckOut";
-import Login from "./pages/LogIn";
-import Register from "./pages/Register";
+import CheckOut from "./Pages/CheckOut";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 import { ToastContainer } from "react-toastify";
 import Product from "./Pages/Product";
 
