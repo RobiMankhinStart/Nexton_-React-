@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdDeleteOutline, MdOutlineCancel } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
+import { removeFromCart } from "../../SearchSlice";
 
 const Cart = ({ setOpen }) => {
   const [value, setValue] = useState([]);
@@ -11,6 +13,9 @@ const Cart = ({ setOpen }) => {
       .then((res) => setValue(res.data))
       .catch((err) => console.log(err));
   }, []);
+  const dispatch = useDispatch();
+  const reduxCardIds = useSelector((state) => state.searchProduct.cartItems);
+  // console.log(reduxCardIds);
 
   const localIds = JSON.parse(localStorage.getItem("proId")) || [];
   // console.log(localIds);
@@ -32,6 +37,7 @@ const Cart = ({ setOpen }) => {
     const updatedIDs = localIds.filter((item) => item !== proID);
     localStorage.setItem("proId", JSON.stringify(updatedIDs));
     setRefresh(!refresh);
+    dispatch(removeFromCart(proID));
   };
   // console.log(removeItem);
 

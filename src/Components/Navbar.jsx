@@ -5,13 +5,14 @@ import { Link, useNavigate } from "react-router";
 import Cart from "./common/Cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchPro } from "../SearchSlice";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
+  const reduxCardIds = useSelector((state) => state.searchProduct.cartItems);
   const [searchProducts, setSearchProducts] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ const Navbar = () => {
               <LiaShoppingCartSolid className="size-[32px] text-primary cursor-pointer" />
             </button>
             <span className="text-[12px] font-poppins font-[600] text-white absolute right-[-7px] top-[-4px] size-[20px] rounded-full flex items-center justify-center bg-[#0EA5E9]">
-              {cartItems?.length || 0}
+              {reduxCardIds?.length || 0}
             </span>
           </div>
         </div>
