@@ -7,7 +7,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router";
 import SingleCard from "../common/SingleCard";
 import { useDispatch } from "react-redux";
-import { searchPro } from "../../SearchSlice";
+import { addTocart, searchPro } from "../../SearchSlice";
 
 const HomeReco = () => {
   const settings = {
@@ -73,11 +73,15 @@ const HomeReco = () => {
   }, []);
 
   // add to card.........
+  const [refresh, setRefresh] = useState(false);
+
   const addToCart = (item) => {
     const proDuctids = JSON.parse(localStorage.getItem("proId")) || [];
     proDuctids.push(item);
     localStorage.setItem("proId", JSON.stringify(proDuctids));
+    setRefresh(!refresh);
     // console.log(JSON.parse(localStorage.getItem("proId")));
+    dispatch(addTocart(item));
   };
   // navigate to shop page /
   const handleToShop = () => {

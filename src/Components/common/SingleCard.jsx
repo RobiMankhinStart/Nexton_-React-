@@ -1,7 +1,6 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
-import { Link } from "react-router";
 
 const SingleCard = ({
   addToCart,
