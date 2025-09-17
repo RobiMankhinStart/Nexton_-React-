@@ -3,13 +3,19 @@ import { IoResize } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 // import ProductImg from "../../assets/Images/ProductImage.png";
 
 const CheckSummery = () => {
   const [Product, setProduct] = useState([]);
   const params = useParams();
   const localIDs = JSON.parse(localStorage.getItem("proId")) || [];
-
+  const reduxItemsForCart = useSelector(
+    (state) => state.searchProduct.cartItems
+  );
+  // console.log(reduxItemsForCart);
+  const myIds = reduxItemsForCart.map((item) => item);
+  console.log("ids", myIds);
   // ---------Api
   useEffect(() => {
     axios
@@ -24,7 +30,7 @@ const CheckSummery = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(Product);
+  // console.log(Product);
   // removing a product from cart...
   const [refresh, setRefresh] = useState(false);
   const removeItem = (proID) => {

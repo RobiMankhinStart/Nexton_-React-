@@ -7,7 +7,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router";
 import SingleCard from "../common/SingleCard";
 import { useDispatch } from "react-redux";
-import { searchPro } from "../../SearchSlice";
+import { addTocart, searchPro } from "../../SearchSlice";
 
 const BestSeller = () => {
   const settings = {
@@ -78,6 +78,7 @@ const BestSeller = () => {
     proDuctids.push(item);
     localStorage.setItem("proId", JSON.stringify(proDuctids));
     // console.log(JSON.parse(localStorage.getItem("proId")));
+    dispatch(addTocart(item));
   };
   // navigate to shop page /
   const handleToShop = () => {
@@ -111,7 +112,7 @@ const BestSeller = () => {
           </div>
           <div className="mt-10 flex justify-center">
             <div
-              className=" w-[160px] px-3 rounded-md text-center  p-2 bg-cyan-600 font-poppins text-white font-semibold"
+              className="cursor-pointer w-[160px] px-3 rounded-md text-center  p-2 bg-cyan-600 font-poppins text-white font-semibold"
               onClick={handleToShop}
             >
               See More

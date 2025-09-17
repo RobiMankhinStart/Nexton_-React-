@@ -24,7 +24,7 @@ const ResponsiveCheckout = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(Product);
+  // console.log(Product);
   // removing a product from cart...
   const [refresh, setRefresh] = useState(false);
   const removeItem = (proID) => {

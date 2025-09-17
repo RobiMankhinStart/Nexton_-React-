@@ -3,9 +3,11 @@ import axios from "axios";
 import Pagination from "../Pagination";
 import SingleCard from "../common/SingleCard";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addTocart } from "../../SearchSlice";
 
 const AllShopProducts = () => {
+  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
   const reduxProduct = useSelector((state) => state.searchProduct.value);
   const [page, setPage] = useState(1);
@@ -37,8 +39,8 @@ const AllShopProducts = () => {
     const proDuctids = JSON.parse(localStorage.getItem("proId")) || [];
     proDuctids.push(item);
     localStorage.setItem("proId", JSON.stringify(proDuctids));
-
     // console.log(JSON.parse(localStorage.getItem("proId")));
+    dispatch(addTocart(item));
   };
 
   const start = (page - 1) * itemsPerPage;
