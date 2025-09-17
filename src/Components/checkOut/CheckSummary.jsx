@@ -3,40 +3,47 @@ import { IoResize } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../SearchSlice";
 // import ProductImg from "../../assets/Images/ProductImage.png";
 
 const CheckSummery = () => {
   const [Product, setProduct] = useState([]);
+  const dispatch = useDispatch();
   const params = useParams();
-  const localIDs = JSON.parse(localStorage.getItem("proId")) || [];
-  const reduxItemsForCart = useSelector(
-    (state) => state.searchProduct.cartItems
-  );
-  // console.log(reduxItemsForCart);
-  const myIds = reduxItemsForCart.map((item) => item);
-  console.log("ids", myIds);
-  // ---------Api
+  const reduxIdsForCart = useSelector((state) => state.searchProduct.cartItems);
+  console.log("reduxIdsForCart", reduxIdsForCart);
+
+  // .................
+  // ---------Api fetching
   useEffect(() => {
     axios
       .get(`https://api.escuelajs.co/api/v1/products`)
       .then((res) => {
-        const cartItems = res.data.filter((item) => localIDs.includes(item.id));
+        const cartItems = res.data.filter((item) =>
+          reduxIdsForCart.includes(item.id)
+        );
 
-        const dataWithQTY = cartItems.map((item) => {
-          return { ...item, qty: 1, uniquePrice: item.price };
-        });
-        setProduct(dataWithQTY);
+        // const dataWithQTY = cartItems.map((item) => {
+        //   const exist = Product.find((p) => p.id === item.id);
+        //   return exist ? exist : { ...item, qty: 1, uniquePrice: item.price };
+        // });
+        // setProduct(dataWithQTY);
+        setProduct((prev) =>
+          cartItems.map((item) => {
+            const exist = prev.find((p) => p.id === item.id);
+            return exist ? exist : { ...item, qty: 1, uniquePrice: item.price };
+          })
+        );
       })
       .catch((err) => console.log(err));
-  }, []);
-  // console.log(Product);
+  }, [reduxIdsForCart]);
+  console.log("Product", Product);
+
+  // ......................
   // removing a product from cart...
-  const [refresh, setRefresh] = useState(false);
   const removeItem = (proID) => {
-    const removedIDs = localIDs.filter((id) => id != proID);
-    localStorage.setItem("proId", JSON.stringify(removedIDs));
-    setRefresh(!refresh);
+    dispatch(removeFromCart(proID));
   };
 
   // console.log(Product);
