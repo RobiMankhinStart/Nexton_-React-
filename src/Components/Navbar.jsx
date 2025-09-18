@@ -11,7 +11,7 @@ import { searchPro } from "../SearchSlice";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
+  // const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
   const reduxCardIds = useSelector((state) => state.searchProduct.cartItems);
   const [searchProducts, setSearchProducts] = useState(null);
   const dispatch = useDispatch();

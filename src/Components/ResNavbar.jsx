@@ -7,9 +7,12 @@ import { Link } from "react-router";
 import { MdOutlineCancel } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 import Cart from "./common/Cart";
+import { useSelector } from "react-redux";
 
 const ResNavbar = () => {
-  const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
+  // const cartItems = JSON.parse(localStorage.getItem("proId")) || [];
+  const reduxCardIds = useSelector((state) => state.searchProduct.cartItems);
+
   const [open, setOpen] = useState(false);
 
   const [showNav, setShowNav] = useState(false);
@@ -64,7 +67,7 @@ const ResNavbar = () => {
                 className="size-[32px] border-2 p-[-1px] text-primary cursor-pointer"
               />
               <span className="text-[12px] font-poppins font-[600] text-white absolute right-[-7px] top-[42px] size-[20px] rounded-full flex items-center justify-center bg-[#0EA5E9]">
-                {cartItems?.length || 0}
+                {reduxCardIds?.length || 0}
               </span>
             </div>
           </div>

@@ -10,9 +10,8 @@ import { removeFromCart } from "../../SearchSlice";
 const CheckSummery = () => {
   const [Product, setProduct] = useState([]);
   const dispatch = useDispatch();
-  const params = useParams();
   const reduxIdsForCart = useSelector((state) => state.searchProduct.cartItems);
-  console.log("reduxIdsForCart", reduxIdsForCart);
+  // console.log("reduxIdsForCart", reduxIdsForCart);
 
   // .................
   // ---------Api fetching
@@ -23,12 +22,6 @@ const CheckSummery = () => {
         const cartItems = res.data.filter((item) =>
           reduxIdsForCart.includes(item.id)
         );
-
-        // const dataWithQTY = cartItems.map((item) => {
-        //   const exist = Product.find((p) => p.id === item.id);
-        //   return exist ? exist : { ...item, qty: 1, uniquePrice: item.price };
-        // });
-        // setProduct(dataWithQTY);
         setProduct((prev) =>
           cartItems.map((item) => {
             const exist = prev.find((p) => p.id === item.id);
@@ -38,7 +31,7 @@ const CheckSummery = () => {
       })
       .catch((err) => console.log(err));
   }, [reduxIdsForCart]);
-  console.log("Product", Product);
+  // console.log("Product", Product);
 
   // ......................
   // removing a product from cart...

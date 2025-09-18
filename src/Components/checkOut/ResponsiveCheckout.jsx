@@ -5,32 +5,41 @@ import axios from "axios";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { TbRouteAltLeft } from "react-icons/tb";
 import { CiCreditCard1 } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../SearchSlice";
 
 const ResponsiveCheckout = () => {
+  const dispatch = useDispatch();
   const [Product, setProduct] = useState([]);
-  const localIDs = JSON.parse(localStorage.getItem("proId")) || [];
+  // const localIDs = JSON.parse(localStorage.getItem("proId")) || [];
+  const myReduxCartIds = useSelector((state) => state.searchProduct.cartItems);
+  console.log("myReduxCartIds", myReduxCartIds);
 
   // ---------Api
   useEffect(() => {
     axios
       .get(`https://api.escuelajs.co/api/v1/products`)
       .then((res) => {
-        const cartItems = res.data.filter((item) => localIDs.includes(item.id));
+        const cartItems = res.data.filter((item) =>
+          myReduxCartIds.includes(item.id)
+        );
 
-        const dataWithQTY = cartItems.map((item) => {
-          return { ...item, qty: 1, uniquePrice: item.price };
-        });
-        setProduct(dataWithQTY);
+        setProduct((prev) =>
+          cartItems.map((item) => {
+            const existingItem = prev.find((p) => p.id === item.id);
+            return existingItem
+              ? existingItem
+              : { ...item, qty: 1, uniquePrice: item.price };
+          })
+        );
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [myReduxCartIds]);
   // console.log(Product);
   // removing a product from cart...
-  const [refresh, setRefresh] = useState(false);
+
   const removeItem = (proID) => {
-    const removedIDs = localIDs.filter((id) => id != proID);
-    localStorage.setItem("proId", JSON.stringify(removedIDs));
-    setRefresh(!refresh);
+    dispatch(removeFromCart(proID));
   };
 
   // console.log(Product);
@@ -174,13 +183,13 @@ const ResponsiveCheckout = () => {
         {/* ---------inputs 1-------- */}
         {/* ---------inputs 2-------- */}
         <div className="p-[24px] ">
-          <div className="w-[100%] flex items-center gap-4 justify-center">
+          <div className="w-[100%] flex-col lg:flex-row flex lg:items-center gap-4 justify-center">
             <div className="">
               <p className="text-base font-poppins font-semibold text-[#111827] mb-2">
                 First name
               </p>
               <input
-                className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
+                className="w-[100%] border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
                 type="text"
               />
             </div>
@@ -189,7 +198,7 @@ const ResponsiveCheckout = () => {
                 Last name
               </p>
               <input
-                className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
+                className="w-[100%] border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
                 type="text"
               />
             </div>
@@ -229,13 +238,13 @@ const ResponsiveCheckout = () => {
           </div>
         </div>
         {/* ---------inputs 4-------- */}
-        <div className="py-[24px] px-3 flex item-center justify-between w-[90%]  items-center gap-4 ">
+        <div className="py-[24px] pl-6 flex flex-col lg:flex-row lg:item-center justify-between w-[90%] gap-4 ">
           <div>
             <p className="text-base  font-semibold font-poppins text-second mb-2">
               City
             </p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-1 outline-none"
+              className="w-full border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-1 outline-none"
               type="text"
             />
           </div>
@@ -244,19 +253,19 @@ const ResponsiveCheckout = () => {
               Country
             </p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-1 outline-none"
+              className="w-full border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-1 outline-none"
               type="text"
             />
           </div>
         </div>
         {/* ---------inputs 5-------- */}
-        <div className="p-[24px] flex gap-4 item-center justify-center w-[100%]">
+        <div className="p-[24px] flex flex-col lg:flex-row gap-4 lg:item-center justify-center w-[100%]">
           <div>
             <p className="text-base font-poppins font-semibold text-second mb-2">
               State/Province
             </p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
+              className="w-full border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
               type="text"
             />
           </div>
@@ -265,7 +274,7 @@ const ResponsiveCheckout = () => {
               Postal code
             </p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px] h-[43px] pl-2 outline-none"
+              className="w-full border-2 border-[#E5E7EB] rounded-[12px] h-[43px] pl-2 outline-none"
               type="text"
             />
           </div>
@@ -301,20 +310,20 @@ const ResponsiveCheckout = () => {
           </div>
         </div>
         {/* ---------Input 2-------- */}
-        <div className="px-[24px] flex item-center justify-center gap-4 mt-[24px]">
+        <div className="px-[24px] flex flex-col lg:item-center justify-center gap-4 mt-[24px]">
           <div>
             <p className="text-base font-semibold text-second mb-2">
               Expiration date
             </p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
+              className="w-[90%] border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
               type="text"
             />
           </div>
           <div>
             <p className="text-base font-semibold text-second mb-2">CVC</p>
             <input
-              className="border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
+              className="w-[90%] border-2 border-[#E5E7EB] rounded-[12px]  h-[43px] pl-2 outline-none"
               type="text"
             />
           </div>
